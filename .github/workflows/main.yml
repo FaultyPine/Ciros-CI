@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
     inputs:
       commit-info:
-        type: string
         default: "No commit info"
+        description: "Commit info in discord msg"
 
 
 permissions:
@@ -23,7 +23,7 @@ jobs:
       #    lfs: true
       - name: display inputs
         run: |
-          echo ${{ github.event.inputs.commit-info }}
+          echo echo "${{ toJSON(github.event.inputs) }}"
       - name: Setup SSH
         uses: MrSquaare/ssh-setup-action@v1
         with:
