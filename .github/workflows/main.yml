@@ -87,6 +87,6 @@ jobs:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           title: "New build is ready!"
           description: |
-            ${{ github.event.inputs.commit-info }}
+            *${{ github.event.inputs.commit-info }}*
             Download build [here](${{ steps.releasestep.outputs.url }})
           nodetail: true
