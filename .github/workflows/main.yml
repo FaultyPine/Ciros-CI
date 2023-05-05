@@ -86,5 +86,5 @@ jobs:
           title: "New build is ready!"
           description: |
             ${{ github.event.inputs.commit-info }}
-            Download build [here](${${{ steps.releasestep.outputs.url }}/tag/download}/Build.zip)
+            Download build [here](${{ steps.releasestep.outputs.url }})
           nodetail: true
