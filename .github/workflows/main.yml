@@ -80,4 +80,4 @@ jobs:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           title: "Commit SHA: ${{ github.sha }}"
           description: "Download build here: ${{ steps.releasestep.outputs.url }}"
-          nodetail: true
+          noprefix: true
