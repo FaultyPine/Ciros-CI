@@ -23,7 +23,7 @@ jobs:
       #    lfs: true
       - name: display inputs
         run: |
-          echo "${{ toJSON(github.event.inputs) }}"
+          echo ""${{ toJSON(github.event.inputs) }}""
       - name: Setup SSH
         uses: MrSquaare/ssh-setup-action@v1
         with:
