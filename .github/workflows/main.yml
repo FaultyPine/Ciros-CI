@@ -72,11 +72,12 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: Build.zip
-          tag_name: "AutoBuild"
+          tag_name: "AutoBuild-${{ github.sha }}"
           
       - name: Discord post   
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          content: "Download build here: ${{ steps.releasestep.outputs.url }}"
+          title: "Commit SHA: ${{ github.sha }}"
+          description: "Download build here: ${{ steps.releasestep.outputs.url }}"
           nodetail: true
