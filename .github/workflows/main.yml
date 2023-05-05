@@ -1,6 +1,12 @@
 name: Actions
 
-on: [push, pull_request, workflow_dispatch]
+on:
+  workflow_dispatch:
+    inputs:
+      commit-info:
+        type: string
+        default: "No commit info"
+
 
 permissions:
   contents: write
@@ -78,6 +84,8 @@ jobs:
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          title: "Commit SHA: ${{ github.sha }}"
-          description: "Download build here: ${{ steps.releasestep.outputs.url }}"
-          noprefix: true
+          title: "New build is ready!"
+          description: |
+            ${{ github.event.inputs.commit-info }}
+            Download build [here](${{ steps.releasestep.outputs.url }}/Build.zip)
+          nodetail: true
