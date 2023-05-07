@@ -31,7 +31,7 @@ jobs:
           private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       
       - name: clone repo
-        run: git clone git@gitlab.com:FaultyPine/BOTW-Mechanic-Recreation.git
+        run: git clone git@gitlab.com:jmchurch/conqueringciros.git
 
       # Cache
       #- uses: actions/cache@v2
@@ -60,7 +60,7 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: StandaloneWindows
-          projectPath: BOTW-Mechanic-Recreation
+          projectPath: ConqueringCiros
           versioning: None
 
       # Output
