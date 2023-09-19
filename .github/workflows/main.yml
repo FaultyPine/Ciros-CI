@@ -24,6 +24,7 @@ jobs:
       - name: display inputs
         run: |
           echo '${{ toJSON(github.event.inputs) }}'
+          echo '${{ github.ref }}'
       - name: Setup SSH
         uses: MrSquaare/ssh-setup-action@v1
         with:
@@ -53,17 +54,23 @@ jobs:
 
 
       # Build
-      - name: Build project
-        uses: game-ci/unity-builder@v2
-        id: buildstep
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-        with:
-          targetPlatform: StandaloneWindows
-          projectPath: conqueringciros/ConqueringCiros
-          versioning: None
+      #- name: Build project
+      #  uses: game-ci/unity-builder@v2
+      #  id: buildstep
+      #  env:
+      #    UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+      #    UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+      #    UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+      #  with:
+      #    targetPlatform: StandaloneWindows
+      #    projectPath: conqueringciros/ConqueringCiros
+      #    versioning: None
+      - name: Build project (test)
+        run: |
+          mkdir build
+          cd build
+          touch build_contents.txt
+          cd ..
 
       # Output
       #- uses: actions/upload-artifact@v2
@@ -89,7 +96,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: ${{ github.ref }}
+          tag_name: AutoBuild-${{ github.ref }}
           release_name: Release ${{ github.ref }}
           body: |
             New build
