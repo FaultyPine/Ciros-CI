@@ -54,23 +54,24 @@ jobs:
 
 
       # Build
-      #- name: Build project
-      #  uses: game-ci/unity-builder@v2
-      #  id: buildstep
-      #  env:
-      #    UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-      #    UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-      #    UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-      #  with:
-      #    targetPlatform: StandaloneWindows
-      #    projectPath: conqueringciros/ConqueringCiros
-      #    versioning: None
-      - name: Build project (test)
-        run: |
-          mkdir build
-          cd build
-          touch build_contents.txt
-          cd ..
+      - name: Build project
+        uses: game-ci/unity-builder@v2
+        id: buildstep
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: StandaloneWindows
+          projectPath: conqueringciros/ConqueringCiros
+          versioning: None
+      
+      #- name: Build project (test)
+      #  run: |
+      #    mkdir build
+      #    cd build
+      #    touch build_contents.txt
+      #    cd ..
 
       # Output
       #- uses: actions/upload-artifact@v2
@@ -98,7 +99,7 @@ jobs:
         with:
           tag_name: AutoBuild-${{ github.run_id }}-${{ github.run_attempt }}
           release_name: Release ${{ github.run_id }}-${{ github.run_attempt }}
-          body_path: Build.zip
+          body: Autobuild
           draft: false
           prerelease: false
 
