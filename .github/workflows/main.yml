@@ -76,12 +76,25 @@ jobs:
             zip -r Build.zip build
             ls
           
-      - name: Release
+ #     - name: Release
+ #       id: releasestep
+ #       uses: softprops/action-gh-release@v1
+ #      with:
+ #         files: Build.zip
+ #         tag_name: "AutoBuild-${{ github.sha }}"
+
+      - name: Create Release
         id: releasestep
-        uses: softprops/action-gh-release@v1
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          files: Build.zip
-          tag_name: "AutoBuild-${{ github.sha }}"
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            New build
+          draft: false
+          prerelease: false
           
       - name: Discord post   
         uses: sarisia/actions-status-discord@v1
