@@ -30,6 +30,19 @@ jobs:
         with:
           host: gitlab.com
           private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Free Up GitHub Actions Ubuntu Runner Disk Space
+        uses: jlumbroso/free-disk-space@main
+        with:
+          # This might remove tools that are actually needed, if set to "true" but frees about 6 GB
+          tool-cache: true
+
+          # All of these default to true, but feel free to set to "false" if necessary for your workflow
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          swap-storage: true
       
       - name: clone repo
         run: git clone git@gitlab.com:jmchurch/conqueringciros.git
