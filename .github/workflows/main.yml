@@ -6,6 +6,9 @@ on:
       commit-info:
         default: "No commit info"
         description: "Commit info in discord msg"
+      branch:
+        default: "main"
+        description: "Branch to make a build from"
 
 
 permissions:
@@ -45,7 +48,7 @@ jobs:
           swap-storage: true
       
       - name: clone repo
-        run: git clone git@gitlab.com:jmchurch/conqueringciros.git
+        run: git clone -b ${{ github.event.inputs.branch }} git@gitlab.com:jmchurch/conqueringciros.git
       - name: show repo folder structure
         run: find . -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/| - \1/"
 
